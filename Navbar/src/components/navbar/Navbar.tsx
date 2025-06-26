@@ -1,5 +1,5 @@
 import React from 'react'
-import type { IRoute } from '../router/routes'
+import type { IRoute } from '../../router/routes'
 import { NavLink, Outlet} from 'react-router-dom'
 
 
