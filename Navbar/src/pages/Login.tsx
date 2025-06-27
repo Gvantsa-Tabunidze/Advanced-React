@@ -7,7 +7,7 @@ import $axios from '../http'
 const Login = () => {
     const  onSubmit =(formData:IAuth) =>{
         $axios.post('/login', {...formData})
-        .then((res)=>console.log(res.data))
+        .then((res)=>localStorage.setItem('token', res.data.accessToken ))
         .catch((err)=>console.log(err))
     }  
     

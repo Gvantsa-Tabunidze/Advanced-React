@@ -15,9 +15,11 @@ import AdbIcon from '@mui/icons-material/Adb';
 import type { IRoute } from '../../router/routes';
 import {Outlet, useNavigate} from 'react-router-dom'
 import AuthButtons from './AuthButtons';
+import { useAuthContext } from '../../context/auth.context';
+import { CircularProgress } from '@mui/material';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Logout'];
+
 
 interface MUINavbarProps {
     routes: IRoute[],
@@ -25,7 +27,10 @@ interface MUINavbarProps {
 }
 
 const MUINavbar:React.FC<MUINavbarProps> = ({routes})=>  {
-  const auth = {token:false}
+
+  const {user:{email}, loading, logout} = useAuthContext()
+  const settings = [{title:'Profile', action:()=>{}}, {title:'Logout', action: logout}];
+  
   const navigate=useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -101,7 +106,7 @@ const MUINavbar:React.FC<MUINavbarProps> = ({routes})=>  {
             ))}
           </Box>
 
-          {auth.token ? <Box sx={{ flexGrow: 0 }}>
+          {loading ? <CircularProgress style={{color:'white'}} /> : email? <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -123,9 +128,11 @@ const MUINavbar:React.FC<MUINavbarProps> = ({routes})=>  {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={()=>handleCloseUserMenu(path)}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+              {settings.map(({title, action}) => (
+                <MenuItem key={title} onClick={()=>handleCloseUserMenu}>
+                  <Button onClick={action}>
+                  <Typography sx={{ textAlign: 'center' }}>{title}</Typography>
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>

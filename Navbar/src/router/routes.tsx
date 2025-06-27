@@ -6,5 +6,6 @@ export interface IRoute {
 export const routes:IRoute[] = [
     {path: '/', label: 'Home'},
     {path: '/about', label: 'About'},
-    {path: '/contacts', label: 'Contacts'}
+    {path: '/contacts', label: 'Contacts'},
+    {path: '/users', label: 'Users'}
 ]
