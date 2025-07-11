@@ -32,20 +32,10 @@ const DogsPage:React.FC = () => {
       </div>
 
 
-      {/* <select value ={page} onChange={e=> setPage(Number(e.target.value))}>
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        <option value={3}>3</option>
-        <option value={4}>4</option>
-        <option value={5}>5</option>
-        <option value={6}>6</option>
-      </select> */}
-
-
       <div className='dogContainer'>
         {newData?.map((dog)=>(
-          <div  key={dog.id} onMouseEnter={() => preFetch(dog.id, { ifOlderThan: 60})}>
-             <DogCard  dog={dog} />
+          <div  key={dog.id} onMouseEnter={() => {preFetch(dog.id, { ifOlderThan: 60}), console.log(preFetch(dog.id))}}>
+            <DogCard  dog={dog} />
           </div>
         ))}
       </div>

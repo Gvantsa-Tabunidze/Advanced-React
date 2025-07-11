@@ -1,0 +1,13 @@
+.navdiv{
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    a{
+        text-decoration: none;
+        font-size: 20px;
+        font-family: 'Roboto';
+        color: black;
+    }
+}
